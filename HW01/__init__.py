@@ -77,7 +77,7 @@ def inner_prod(u, v):
     if u.shape != v.shape:
         print("Bad arguments: vector length does not match!", file=sys.stderr)
         return 0
-    return np.vdot(u, v)
+    return np.vdot(v, u)  # Vdot uses complex conjugate on the first arg, so we reverse the input
 
 
 if __name__ == '__main__':
