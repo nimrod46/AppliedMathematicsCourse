@@ -5,11 +5,9 @@ import numpy as np
 
 def inner_prod(u, v):
     if u.shape[1] != 1 or v.shape[1] != 1:
-        print("Bad arguments: input is not a column vector!", file=sys.stderr)
-        return 0
+        raise ValueError("Bad arguments: input is not a column vector!")
     if u.shape != v.shape:
-        print("Bad arguments: vector length does not match!", file=sys.stderr)
-        return 0
+        raise ValueError("Bad arguments: vector length does not match!")
     return np.vdot(v, u)  # Vdot uses complex conjugate on the first arg, so we reverse the input
 
 

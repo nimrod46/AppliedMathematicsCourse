@@ -13,6 +13,6 @@ plt.plot(x, y1, 'b', x, y2, 'r')
 
 plt.show()
 
-print("<y1, y2>(1): " + str(np.dot(np.array([y1]), np.array([y2]))))
+print("<y1, y2>(1): " + str(np.vdot(np.array([y1]), np.array([y2]))))
 
 print("<y1, y2>(2): " + str((y1 * y2).sum()))
