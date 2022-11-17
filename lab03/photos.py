@@ -6,7 +6,7 @@ import numpy as np
 
 # 3
 img = plt_img.imread("colors.png")
-
+src_img = img
 # 4
 print("type: " + str(type(img)))
 
@@ -85,4 +85,11 @@ plt.imshow((img[:, :, 0] + img[:, :, 1] + img[:, :, 2]) / 3, cmap='gray')
 plt.show()
 
 # 22
-img = img[:, :, :]
+
+for i in range(np.shape(src_img)[0]):
+    for j in range(np.shape(src_img)[1]):
+        rgb_value = src_img[i, j, 0] + src_img[i, j, 1] + src_img[i, j, 2]
+        src_img[i, j, 3] = 1 if rgb_value == 0 else np.random.uniform(0, 1)
+
+plt.imshow(src_img, cmap='gray')
+plt.show()
