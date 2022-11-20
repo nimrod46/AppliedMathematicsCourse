@@ -22,8 +22,6 @@ plt.show()
 
 # ב
 def frobenius_inner_product(A, B):
-    # inner_prod = sum(map(lambda t: t[0] * t[1], zip(np.ndarray.flatten(A), np.ndarray.flatten(B))))
-    # return inner_prod / (normip(A.flatten(), 2) * normip(B.flatten(), 2))
     inner_prod = (A.T @ B).trace()
     return inner_prod / (normip(A.flatten(), 2) * normip(B.flatten(), 2))
 
