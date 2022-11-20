@@ -4,4 +4,4 @@ def normip(v, p):
     Inputs: v - a numpy array (n dim vector)
     Outputs: natural norm of v
     """
-    return sum(map(lambda x: abs(x ** p), v)) ** 0.5
+    return sum(map(lambda x: abs(x) ** p, v)) ** (1 / p)
