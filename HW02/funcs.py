@@ -1,3 +1,4 @@
+# i)
 def normip(v, p):
     """
     function to compute the natural norm of an input vector.
