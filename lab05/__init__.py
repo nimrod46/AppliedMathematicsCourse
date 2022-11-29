@@ -13,7 +13,7 @@ fs = 10000
 
 res = get_func(5, fs, 1209) + get_func(5, fs, 697)
 
-sd.play(res, fs)
+# sd.play(res, fs)
 
 
 # 0.1.1
@@ -38,7 +38,7 @@ def dail(phone_number):
         temp = temp[1:]
 
 
-dail("0507486317")
+# dail("0507486317")
 
 
 # 0.2
@@ -49,10 +49,9 @@ def gram_schmidt_algo(mat):
         v = mat[:, i].reshape(-1, 1)
         for j in range(i):
             u = res_mat[:, j].reshape(-1, 1)
-            v = v - (np.vdot(u.T, v) / np.vdot(u.T, u)) * u
+            v = v - ((u.T @ v) / (u.T @ u)) * u
         res_mat[:, i] = v.reshape((-1,))
-    for i in range(res_mat.shape[1]):
-        res_mat[:, i] = res_mat[:, i] / np.linalg.norm(res_mat[:, i], axis=0)
+    res_mat = res_mat / np.linalg.norm(res_mat, axis=0)
     return res_mat
 
 
