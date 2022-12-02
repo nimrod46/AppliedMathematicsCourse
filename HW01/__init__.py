@@ -6,6 +6,7 @@ import matplotlib
 
 
 def start():
+    pass
 
 
 if __name__ == '__main__':
