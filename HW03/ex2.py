@@ -57,5 +57,5 @@ def find_chirp(x_noise, sig, fs, dur, sig_dur):
 
 # e
 toa, sample_index = find_chirp(x_noise, sig, fs, dur, sig_dur)
-print(toa)
-print(sample_index)
+print("Time of arrival: " + str(toa))
+print("Sample index: " + str(sample_index))
