@@ -21,7 +21,7 @@ fig, axs = plt.subplots(2)
 axs[0].plot(tt[:200], sig[:200])
 axs[1].plot(tt[:-200], sig[:-200])
 fig.show()
-sd.play(sig, fs)
+# sd.play(sig, fs)
 
 # c
 n_noise = int(fs * dur)
@@ -32,7 +32,7 @@ x_noise[n_start:n_start + n_sig] += sig
 
 
 # d
-def find_chirp(x_noise, sig, frame, n_noise, dur):
+def find_chirp(x_noise, sig, fs, dur, sig_dur):
     def inner_product(x1, x2, normal=0):
         ip = sum(x1 * x2)
         if normal == 1:
@@ -42,6 +42,8 @@ def find_chirp(x_noise, sig, frame, n_noise, dur):
         return ip
 
     step = 100
+    n_noise = int(fs * dur)
+    frame = int(fs * sig_dur)
     iplen = int((n_noise - frame) / step)
     ip = np.zeros(iplen)
     for j in range(iplen):
@@ -50,10 +52,10 @@ def find_chirp(x_noise, sig, frame, n_noise, dur):
     plt.plot(ip)
     plt.show()
     toa_index = ip.argmax()
-    return (toa_index * dur / iplen), toa_index
+    return (toa_index * (dur - sig_dur) / iplen), toa_index
 
 
 # e
-toa, sample_index = find_chirp(x_noise, sig, n_sig, n_noise, dur)
+toa, sample_index = find_chirp(x_noise, sig, fs, dur, sig_dur)
 print(toa)
 print(sample_index)
