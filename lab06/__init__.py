@@ -19,6 +19,8 @@ def run():
 
     plt.show()
 
+    fig.savefig("figure.png")
+
 
 def plot_3d_to_1d(ax):
     u = np.array([5, 3, 2])
@@ -57,23 +59,23 @@ def plot_3d_to_3d(ax):
     es = [np.array([1, 0, 0]), np.array([0, 1, 0])]
     xx = np.arange(0, 10, 0.1)
     yy = np.arange(0, 10, 0.1)
-    a, b = np.meshgrid(xx, yy, sparse=True)
+    a, b = np.meshgrid(xx, yy)
     zz = np.zeros(a.shape)
-    x = 5 + 1.5 * np.sin(a) * np.cos(b)
-    y = 5 + 1.5 * np.sin(a) * np.sin(b)
-    z = 8 + 1.5 * np.cos(a)
+    x = 5 + 2 * np.sin(a) * np.cos(b)
+    y = 5 + 2 * np.sin(a) * np.sin(b)
+    z = 5 + 2 * np.cos(a)
 
-    x_proj = np.zeros(x.shape[0])
-    y_proj = np.zeros(x.shape[0])
-    z_proj = np.zeros(x.shape[0])
-    l = zip(x, y, z)
-    for i, ar in enumerate(l):
-        u = np.array(ar)
-        for j in range(u.shape[1]):
-            u_proj = get_proj(u[:, j], es)
-            x_proj[j] = u_proj[0]
-            y_proj[j] = u_proj[1]
-            z_proj[j] = u_proj[2]
+    x_proj = []
+    y_proj = []
+    z_proj = []
+    l = list(zip(x, y, z))
+    for a1, a2, a3 in l:
+        for j in range(len(a1)):
+            u_proj = get_proj(np.array([a1[j], a2[j], a3[j]]), es)
+            x_proj.append(u_proj[0])
+            y_proj.append(u_proj[1])
+            z_proj.append(u_proj[2])
+        print("ii")
 
     ax.plot_surface(a, b, zz, alpha=0.5)
     ax.scatter(x_proj, y_proj, z_proj, marker='.', color='red')
