@@ -42,17 +42,17 @@ def find_chirp(x_noise, sig, fs, dur, sig_dur):
         return ip
 
     step = 100
-    n_noise = int(fs * dur)
-    frame = int(fs * sig_dur)
-    iplen = int((n_noise - frame) / step)
-    ip = np.zeros(iplen)
-    for j in range(iplen):
-        x_test = x_noise[j * step:j * step + frame]
+    noise_len = int(fs * dur)
+    sig_len = int(fs * sig_dur)
+    ip_len = int((noise_len - sig_len) / step)
+    ip = np.zeros(ip_len)
+    for j in range(ip_len):
+        x_test = x_noise[j * step:j * step + sig_len]
         ip[j] = inner_product(x_test, sig, 1)
     plt.plot(ip)
     plt.show()
     toa_index = ip.argmax()
-    return (toa_index * (dur - sig_dur) / iplen), toa_index
+    return (toa_index * (dur - sig_dur) / ip_len), toa_index
 
 
 # d
@@ -65,8 +65,6 @@ chirp = np.load('chirp.npy')
 xnsig = np.load('xnsig.npy')
 dur = 35
 sig_dur = 0.7
-sig = chirp
-x_noise = xnsig
-toa, sample_index = find_chirp(x_noise, sig, fs, dur, sig_dur)
+toa, sample_index = find_chirp(xnsig, chirp, fs, dur, sig_dur)
 print("Time of arrival: " + str(toa))
 print("Sample index: " + str(sample_index))
