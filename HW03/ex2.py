@@ -55,7 +55,18 @@ def find_chirp(x_noise, sig, fs, dur, sig_dur):
     return (toa_index * (dur - sig_dur) / iplen), toa_index
 
 
+# d
+toa, sample_index = find_chirp(x_noise, sig, fs, dur, sig_dur)
+print("Time of arrival: " + str(toa))
+print("Sample index: " + str(sample_index))
+
 # e
+chirp = np.load('chirp.npy')
+xnsig = np.load('xnsig.npy')
+dur = 35
+sig_dur = 0.7
+sig = chirp
+x_noise = xnsig
 toa, sample_index = find_chirp(x_noise, sig, fs, dur, sig_dur)
 print("Time of arrival: " + str(toa))
 print("Sample index: " + str(sample_index))
