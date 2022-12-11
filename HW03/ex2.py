@@ -19,7 +19,7 @@ sig_dur = 0.7
 sig, tt = get_chirp(f0, u, fs, sig_dur)
 fig, axs = plt.subplots(2)
 axs[0].plot(tt[:200], sig[:200])
-axs[1].plot(tt[:-200], sig[:-200])
+axs[1].plot(tt[-200:], sig[-200:])
 fig.show()
 # sd.play(sig, fs)
 
