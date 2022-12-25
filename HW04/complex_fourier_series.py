@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from numpy import dtype
 
-def FourierSynthesis(func, cn, N, m):
+def FourierSynthezis_complex(func, cn, N, m):
     """
 
     """
@@ -35,6 +35,10 @@ def FourierSynthesis(func, cn, N, m):
 a0 = 0
 cn = '(((-1)**n)*(e**pi-e**(-pi)))/((2*pi)*(1-1j*n))'
 func = 'e**x'
+
+
+cn = '(1j*(-1)**n)/(n) if n != 0 else 0'
+func = 'x'
 m = 100
 N = 10000
-FourierSynthesis(func, cn, N, m)
+FourierSynthezis_complex(func, cn, N, m)
