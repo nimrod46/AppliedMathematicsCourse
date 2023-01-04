@@ -2,7 +2,7 @@ import numpy as np
 
 
 def simpson_integration(a, b, func, n):
-    x = np.linspace(a, b, n)
+    x = np.linspace(a, b, n+1)
     f = func(x)
     f[1:-1:2] *= 4
     f[2:-2:2] *= 2
