@@ -52,7 +52,7 @@ def num_integral(func, a, b, n, method='simpson'):
     return func_dict[method](func, a, b, n)
 
 
-def FourierEstComplex(m, N, func, xl=-np.pi, xr=np.pi, method = 'quad'):
+def FourierEstComplex(m, N, func, xl=-np.pi, xr=np.pi, method='quad'):
     """
     FourierEstComplex computes a partial sum of Fourier series
     for a given function on the interval [a,b]. The Fourier coefficients
@@ -75,20 +75,17 @@ def FourierEstComplex(m, N, func, xl=-np.pi, xr=np.pi, method = 'quad'):
     if method != 'quad':
         integration_func = partial(num_integral, a=xl, b=xr, n=N, method=method)
     else:
-        integration_func = partial(scipy.integrate.quad, a=xl, b=xl)
+        integration_func = lambda f: scipy.integrate.quad(f, a=xl, b=xr)[0]
     x_sample = np.linspace(xl, xr, N)
     sample_func = func(x_sample)
     approx_func = np.zeros(N, dtype="complex128")
     norm = 1 / (xr - xl)
-    # c_n = np.zeros(m * 2)
     for n in range(-m, m + 1):
         c_n_re = integration_func(lambda x: np.real(func(x) * np.exp(-1 * norm * 2 * np.pi * 1j * n * x)))
         c_n_im = integration_func(lambda x: np.imag(func(x) * np.exp(-1 * norm * 2 * np.pi * 1j * n * x)))
         c_n = c_n_re + 1j * c_n_im
         c_n *= norm
-    # c_n = norm * scipy.integrate.quad(lambda x: func(x) * np.exp(-1 * norm * 2 * np.pi * 1j * n * x), xl, xr)[0]
         approx_func += c_n * np.exp(norm * 2 * np.pi * 1j * n * x_sample)
-
 
     fig, ax = plt.subplots(1)
 
@@ -96,8 +93,10 @@ def FourierEstComplex(m, N, func, xl=-np.pi, xr=np.pi, method = 'quad'):
     ax.plot(x_sample, sample_func, color='blue', linestyle='dashdot')
 
     plt.show()
+    return approx_func
 
-print(FourierEstComplex(1500, 10000, lambda x: np.exp(-x), -1, 1, 'simpson'))
+
+print(FourierEstComplex(150, 10000, lambda x: x ** 2, -1, 1, 'simpson'))
 # f = lambda x: x * np.exp(-x)
 # a = 0
 # b = 2
