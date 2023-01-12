@@ -38,8 +38,9 @@ def enforce_game_rule_on(src_mat, des_mat, dense_map, x, y, min, max):
 def game_of_life(min_neighbours, max_neighbours, starting_dense):
     n = 256
     mat = np.random.rand(n, n)
-    mat[mat > starting_dense] = 1
-    mat[mat <= starting_dense] = 0
+    for i in range(n):
+        for j in range(n):
+            mat[i, j] = mat[i, j] > starting_dense
 
     while mat.any():
         plt.imshow(mat, cmap='gray')
@@ -52,12 +53,6 @@ def game_of_life(min_neighbours, max_neighbours, starting_dense):
             for j in range(n):
                 enforce_game_rule_on(mat, new_mat, dense_map, i, j, min_neighbours, max_neighbours)
         mat = new_mat
-
-        # dense_map = get_num_of_neighbours_at(mat)
-        # new_life = (mat == 0) & (dense_map == 3)
-        # end_life = (mat == 1) & ((dense_map > 3) | (dense_map < 2))
-        # mat[new_life] = 1
-        # mat[end_life] = 0
 
 
 game_of_life(2, 3, 0.5)
