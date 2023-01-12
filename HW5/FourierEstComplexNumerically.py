@@ -7,7 +7,7 @@ from matplotlib import pyplot as plt
 
 def darboux_integration(func, a, b, n):
     h = (b - a) / n
-    x = np.linspace(a, b, n)
+    x = np.linspace(a, b, n + 1)
     f = func(x)
     y = h * np.sum(f[:-1])
     return y
@@ -15,7 +15,7 @@ def darboux_integration(func, a, b, n):
 
 def trapezoid_integration(func, a, b, n):
     h = (b - a) / n
-    x = np.linspace(a, b, n)
+    x = np.linspace(a, b, n + 1)
     f = func(x)
     f[1:-1] *= 2
     y = h * np.sum(f) / 2
