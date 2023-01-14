@@ -33,6 +33,11 @@ def simpson_integration(func, a, b, n):
     return y
 
 
+print("darboux integration = " + str(darboux_integration(lambda x: x * np.exp(-x), 0, 2, 100)))
+print("trapezoid integration = " + str(trapezoid_integration(lambda x: x * np.exp(-x), 0, 2, 100)))
+print("simpson integration = " + str(simpson_integration(lambda x: x * np.exp(-x), 0, 2, 100)))
+
+
 def num_integral(func, a, b, n, method='simpson'):
     """
     num_integral computes the area under the curve of a given function
@@ -97,11 +102,3 @@ def FourierEstComplex(m, N, func, xl=-np.pi, xr=np.pi, method='quad'):
 
 
 print(FourierEstComplex(150, 10000, lambda x: x ** 2, -1, 1, 'simpson'))
-# f = lambda x: x * np.exp(-x)
-# a = 0
-# b = 2
-# n = 100
-#
-# print(num_integral(f, a, b, n, 'simpson'))
-# print(num_integral(f, a, b, n, 'trapez'))
-# print(num_integral(f, a, b, n, 'darboux'))
