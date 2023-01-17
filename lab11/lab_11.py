@@ -139,6 +139,7 @@ def highlight_circle(results, img, height, width, figure, ax, fig, nth=4):
     green_rect[0:height, width + 0, 1] = 1
 
     ax.imshow(img + np.roll(green_rect, (results['y'], results['x']), (0, 1)))
+
     ax.set_title(f'Cosine Similarity = {round(results["similarity"], 4)} at ({results["x"]}, {results["y"]})')
 
     ###
