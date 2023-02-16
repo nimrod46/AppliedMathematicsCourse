@@ -34,10 +34,10 @@ x_noise[n_start:n_start + n_sig] += sig
 # d
 def find_chirp(x_noise, sig, fs, dur, sig_dur):
     def inner_product(x1, x2, normal=0):
-        ip = sum(x1 * x2)
+        ip = np.sum(x1 * x2)
         if normal == 1:
-            N1 = np.sqrt(sum(x1 * x1))
-            N2 = np.sqrt(sum(x2 * x2))
+            N1 = np.sqrt(np.sum(x1 * x1))
+            N2 = np.sqrt(np.sum(x2 * x2))
             ip = ip / (N1 * N2)
         return ip
 
